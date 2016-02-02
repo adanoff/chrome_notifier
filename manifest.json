@@ -7,12 +7,17 @@
 
     "page_action": {
         "default_title": "Google Play Notifier",
+        "default_icon": "google_play.png",
         "default_popup": "popup.html"
     },
 
     "background": {
         "persistent": false,
         "scripts": ["background.js"]
-    }
+    },
 
+    "permissions": [
+        "declarativeContent",
+        "activeTab"
+    ]
 }

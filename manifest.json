@@ -8,6 +8,11 @@
     "page_action": {
         "default_title": "Google Play Notifier",
         "default_popup": "popup.html"
+    },
+
+    "background": {
+        "persistent": false,
+        "scripts": ["background.js"]
     }
 
 }

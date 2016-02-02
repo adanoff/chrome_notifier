@@ -21,3 +21,24 @@ chrome.runtime.onInstalled.addListener(function() {
   });
 
 });
+
+// re-inject content script
+chrome.runtime.onInstalled.addListener(startupInject);
+function startupInject() {
+
+  chrome.tabs.query({url: "*://play.google.com/music/*"},
+    function (tabs) {
+
+      for (var i in tabs) {
+        chrome.tabs.executeScript(tabs[i].id, {file: "observer.js"});
+      }
+
+    });
+
+}
+
+// listen for messages from the content script
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  // console.log(sender.tab);
+  sendResponse('10-4: ' + sender.tab.id);
+});

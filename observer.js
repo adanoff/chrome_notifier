@@ -10,15 +10,19 @@ var observer = new window.MutationObserver(function(mutations) {
         var detailsEl = target.querySelector('.currently-playing-details');
         var imgEl = target.querySelector('#playerBarArt');
         var img = imgEl.src;
-        var title = titleEl.innerText;
-        var artist = detailsEl.querySelector('.player-artist').innerText;
-        var album = detailsEl.querySelector('.player-album').innerText;
-        // console.log(target);
-        if (previous != title) {
-          // console.log(title + ' - ' + artist + ' - ' + album + ' - ' + img);
-          notify(title, artist, album, img);
+
+        try {
+          var title = titleEl.innerText;
+          var artist = detailsEl.querySelector('.player-artist').innerText;
+          var album = detailsEl.querySelector('.player-album').innerText;
+          // console.log(target);
+          if (previous != title) {
+            // console.log(title + ' - ' + artist + ' - ' + album + ' - ' + img);
+            notify(title, artist, album, img);
+          }
+          previous = title;
+        } catch(e) { // occurs for ad, do nothing
         }
-        previous = title;
       }
     });
 
@@ -37,11 +41,11 @@ function notify(title, artist, album, src) {
       'album': album,
       'src': src
     }, function(response) {
-      console.log('response received: ' + response);
+      // console.log('response received: ' + response);
     });
 
   } catch(e) { // happens if parent is no longer available
-    console.warn('could not communicate with parent extension, deregistering observer');
-    observer.disconnect();
+    // console.warn('could not communicate with parent extension, deregistering observer');
+    // observer.disconnect();
   }
 }

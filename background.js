@@ -38,7 +38,22 @@ function startupInject() {
 }
 
 // listen for messages from the content script
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(data, sender, sendResponse) {
   // console.log(sender.tab);
-  sendResponse('10-4: ' + sender.tab.id);
+  var options = {
+
+    type: "basic",
+    title: data.title,
+    message: data.artist + ' - ' + data.album,
+    // iconUrl: "google_play.png"
+    iconUrl: data.src
+
+  };
+
+  chrome.notifications.create(options, function(id) {
+    sendResponse('Notification #(' + id + ') created with: ' +
+        JSON.stringify(data));
+  });
+
+  return true;
 });

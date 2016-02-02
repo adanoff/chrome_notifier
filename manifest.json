@@ -4,6 +4,9 @@
     "name": "Google Play Notifier",
     "description": "Get desktop notifications when your Google Play song changes",
     "version": "1.0",
+    "icons": {
+        "128": "google_play.png"
+    },
 
     "page_action": {
         "default_title": "Google Play Notifier",
@@ -19,8 +22,13 @@
     "permissions": [
         "declarativeContent",
         "activeTab",
+        "notifications",
         "http://play.google.com/music/*",
-        "https://play.google.com/music/*"
+        "https://play.google.com/music/*",
+        "https://*.googleusercontent.com/",
+        "http://*.googleusercontent.com/",
+        "https://*.ggpht.com/",
+        "http://*.ggpht.com/"
     ],
 
     "content_scripts": [
